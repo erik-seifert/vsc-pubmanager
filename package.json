@@ -11,29 +11,48 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onView:pubspecManager"
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Hello World"
-            }
-        ]
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "pubspec-manager",
+                    "title": "Pubspec",
+                    "icon": "media/dep.svg"
+                }
+            ]
+        },
+        "views": {
+            "pubspec-manager": [
+                {
+                    "id": "pubspecManager",
+                    "name": "Pub Manager"
+                }
+            ]
+        }
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
+        "vscode:prepublish": "tsc -p ./",
         "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+        "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "tslint": "^5.8.0",
+        "@types/js-yaml": "^3.11.2",
+        "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+        "@types/request-promise": "^4.1.42",
+        "@types/request-promise-native": "^1.0.15",
+        "@types/semver": "^5.5.0",
+        "tslint": "^5.8.0",
+        "typescript": "^2.1.4",
+        "vscode": "^1.1.6"
+    },
+    "dependencies": {
+        "js-yaml": "^3.12.0",
+        "request-promise": "^4.2.2",
+        "request-promise-native": "^1.0.5",
+        "semver": "^5.5.0"
     }
 }
