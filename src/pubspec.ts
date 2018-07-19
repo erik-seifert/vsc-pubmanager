@@ -125,9 +125,9 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
     return semver.satisfies(versionToCheck, allowedVersion) && semver.lt(installedVersion, versionToCheck);
   }
 
-  private checkUpgradeVersion(installedVersion:string , allowedVersion:string , versionToCheck:string): Boolean {
-    return semver.lt(installedVersion, versionToCheck);
-  }
+  // private checkUpgradeVersion(installedVersion:string , allowedVersion:string , versionToCheck:string): Boolean {
+  //   return semver.lt(installedVersion, versionToCheck);
+  // }
 
   private getDepsInPackageVersions(moduleName: string):  Thenable<Dependency[]> {
     const module = moduleName.split(':').shift();

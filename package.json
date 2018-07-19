@@ -3,6 +3,10 @@
     "displayName": "pubmanager",
     "description": "",
     "version": "0.0.1",
+    "repository": {
+      "type": "git",
+      "url": "https://bconnect-berlin.visualstudio.com/pubmanager/_git/pubmanager"
+    },
     "publisher": "bconnect-berlin",
     "engines": {
         "vscode": "^1.25.0"
