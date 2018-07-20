@@ -35,7 +35,26 @@
                     "name": "Pub Manager"
                 }
             ]
-        }
+        },
+        "menus": {
+          "view/title": [
+            {
+              "command": "pubmanager.refresh",
+              "when": "view == pubspecManager",
+              "group": "navigation"
+            }
+          ]
+        },
+        "commands": [
+          {
+            "command": "pubmanager.refresh",
+            "title": "Refresh",
+            "icon": {
+              "light": "resources/light/refresh.svg",
+              "dark": "resources/dark/refresh.svg"
+            }
+          }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",

@@ -166,8 +166,6 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
 
 
 class Dependency extends vscode.TreeItem {
-
-
 	constructor(
 		public readonly label: string,
 		private version: string,

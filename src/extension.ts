@@ -10,7 +10,6 @@ import { PubSpecProvider } from './pubspec';
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-  vscode.window.showInformationMessage('Workspace has no package.json');
   const rootPath = vscode.workspace.rootPath;
   if (rootPath === undefined) {
     return;
@@ -19,6 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   vscode.window.registerTreeDataProvider('pubspecManager', pubSpecProvider);
   vscode.commands.registerCommand('extension.openPackageOnPub', moduleName => vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(`https://pub.dartlang.org/packages/${moduleName}`)));
+  vscode.commands.registerCommand('pubmanager.refresh', () => pubSpecProvider.refresh());
 
 }
 
