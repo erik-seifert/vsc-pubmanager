@@ -2,7 +2,7 @@
     "name": "pubmanager",
     "displayName": "pubmanager",
     "description": "",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "repository": {
         "type": "git",
         "url": "https://bconnect-berlin.visualstudio.com/pubmanager/_git/pubmanager"
