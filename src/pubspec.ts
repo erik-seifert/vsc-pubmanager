@@ -40,7 +40,6 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
 
 	getChildren(element?: Dependency): Thenable<Dependency[]> {
 		if (!this.workspaceRoot) {
-			vscode.window.showInformationMessage('No dependency in empty workspace');
 			return Promise.resolve([]);
     }
 
@@ -53,10 +52,8 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
 			} else {
 				const packageYmlPath = path.join(this.workspaceRoot, 'pubspec.yaml');
 				if (this.pathExists(packageYmlPath)) {
-          vscode.window.showInformationMessage('Get yaml');
 					resolve(this.getDepsInPackage(packageYmlPath));
 				} else {
-					vscode.window.showInformationMessage('Workspace has no package.json');
 					resolve([]);
 				}
 			}
@@ -66,13 +63,19 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
   private getDepsInPackage(packageYmlPath: string):  Thenable<Dependency[]> {
     return new Promise(resolve => {
       const packageYml = yaml.safeLoad(fs.readFileSync(packageYmlPath, 'utf-8'));
-      const packageYmlInstalled = yaml.safeLoad(fs.readFileSync(path.dirname(packageYmlPath) + '/pubspec.lock', 'utf-8'));
-      console.log(packageYmlInstalled);
+      const hasLockFile:Boolean = fs.existsSync(path.dirname(packageYmlPath) + '/pubspec.lock');
+      let packageYmlInstalled:any;
+      if (hasLockFile) {
+        packageYmlInstalled = yaml.safeLoad(fs.readFileSync(path.dirname(packageYmlPath) + '/pubspec.lock', 'utf-8'));
+      }
       let p:Promise<Dependency>[] = [];
 
       Object.keys(packageYml.dependencies).forEach( e => {
         const version = packageYml.dependencies[e];
-        const installed = packageYmlInstalled.packages[e].version;
+        let installed = version;
+        if (hasLockFile) {
+          installed = packageYmlInstalled.packages[e].version;
+        }
         if (version.sdk) {
           p.push(new Promise(resolve => {
             resolve(new Dependency(
