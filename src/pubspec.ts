@@ -171,27 +171,30 @@ class Dependency extends vscode.TreeItem {
     public readonly collapsibleState: vscode.TreeItemCollapsibleState,
     public readonly update:UpdateType,
     public readonly command?: vscode.Command,
-    public readonly iconToShow:string = "no-update"
 	) {
     super(`${label}`, collapsibleState);
-    switch (update) {
-      case UpdateType.MajorUpdate:
-        iconToShow = 'update';
-      break;
-      case UpdateType.MinorUpdate:
-        iconToShow = 'update';
-      break;
-    }
   }
 
 	get tooltip(): string {
 		return `${this.label}-${this.version}`;
   }
 
-  iconPath = {
-		light: path.join(__filename, '..', '..', 'resources', 'light', this.iconToShow , 'dependency.svg'),
-		dark: path.join(__filename, '..', '..', 'resources', 'dark', this.iconToShow , 'dependency.svg')
-	};
+  get iconPath(): any {
+    let iconToShow:string = "no-update";
+    switch (this.update) {
+      case UpdateType.MinorUpdate:
+        iconToShow = 'update';
+      break;
+      case UpdateType.MajorUpdate:
+        iconToShow = 'update';
+      break;
+    }
+    return {
+      light: path.join(__filename, '..', '..', 'resources', 'light', iconToShow , 'dependency.svg'),
+      dark: path.join(__filename, '..', '..', 'resources', 'dark', iconToShow , 'dependency.svg')
+    };
+  }
+
 
   contextValue = 'dependency';
 }

@@ -24,7 +24,7 @@
                 {
                     "id": "pubspec-manager",
                     "title": "Pubspec",
-                    "icon": "media/dep.svg"
+                    "icon": "resources/package.svg"
                 }
             ]
         },
