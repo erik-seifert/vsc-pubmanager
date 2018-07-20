@@ -2,7 +2,7 @@
     "name": "pubmanager",
     "displayName": "pubmanager",
     "description": "",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "repository": {
         "type": "git",
         "url": "https://github.com/b-connect/vsc-pubmanager"
@@ -11,8 +11,13 @@
     "engines": {
         "vscode": "^1.25.0"
     },
+    "icon": "resources/logo.png",
     "categories": [
         "Other"
+    ],
+    "keywords": [
+      "dart",
+      "pub"
     ],
     "activationEvents": [
         "onView:pubspecManager"
