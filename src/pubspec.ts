@@ -73,7 +73,7 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
       Object.keys(packageYml.dependencies).forEach( e => {
         const version = packageYml.dependencies[e];
         let installed = version;
-        if (hasLockFile) {
+        if (hasLockFile && packageYmlInstalled.packages[e] && packageYmlInstalled.packages[e].version) {
           installed = packageYmlInstalled.packages[e].version;
         }
         if (version.sdk) {
