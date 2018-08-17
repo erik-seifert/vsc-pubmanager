@@ -2,7 +2,7 @@
     "name": "pubmanager",
     "displayName": "pubmanager",
     "description": "",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "repository": {
         "type": "git",
         "url": "https://github.com/b-connect/vsc-pubmanager"
@@ -75,7 +75,6 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "@types/dot": "^1.1.2",
         "@types/js-yaml": "^3.11.2",
         "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
@@ -89,7 +88,6 @@
     },
     "dependencies": {
         "@types/mustache": "^0.8.31",
-        "dot": "^1.1.2",
         "js-yaml": "^3.12.0",
         "mustache": "^2.3.1",
         "request": "^2.87.0",

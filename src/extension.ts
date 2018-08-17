@@ -25,16 +25,25 @@ export function activate(context: vscode.ExtensionContext) {
 
   vscode.window.registerTreeDataProvider('pubspecManager', pubSpecProvider);
   vscode.commands.registerCommand('extension.openPackageOnPub', (moduleName: string, version: any) => {
-    const columnToShowIn = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
+    let columnToShowIn = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
+    if (columnToShowIn === undefined) {
+       columnToShowIn =  vscode.ViewColumn.One;
+    }
     if (currentPanel === undefined) {
       currentPanel = vscode.window.createWebviewPanel(moduleName, moduleName, columnToShowIn, {});
     }
+
     currentPanel.title = moduleName;
     currentPanel.webview.html = '<h2>Loading...</h2>';
-    getWebViewContent(moduleName, version).then(r => currentPanel.webview.html = r);
+    getWebViewContent(moduleName, version).then((r) => {
+      if (currentPanel !== undefined) {
+        currentPanel.webview.html = r;
+      }
+    });
     currentPanel.onDidDispose(() => {
       currentPanel = undefined;
     }, null, context.subscriptions);
+
   });
   vscode.commands.registerCommand('pubmanager.refresh', () => pubSpecProvider.refresh());
 }
