@@ -2,7 +2,7 @@
     "name": "pubmanager",
     "displayName": "pubmanager",
     "description": "",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "repository": {
         "type": "git",
         "url": "https://github.com/b-connect/vsc-pubmanager"
