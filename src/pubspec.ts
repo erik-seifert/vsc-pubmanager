@@ -22,7 +22,6 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
     vscode.workspace.onDidSaveTextDocument(e => this.onDocumentChanged(e));
   }
 
-
 	private onDocumentChanged(changeEvent: vscode.TextDocument): void {
     let file:string = path.basename(changeEvent.fileName);
     if (file === 'pubspec.yaml' || file  === 'pubspec.lock') {
@@ -47,7 +46,7 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
 			if (element) {
         this.getDepsInPackageVersions(element.label).then(r => {
           resolve(r);
-        })
+        });
 				// resolve(this.getDepsInPackage(path.join(this.workspaceRoot, 'node_modules', element.label, 'package.json')));
 			} else {
 				const packageYmlPath = path.join(this.workspaceRoot, 'pubspec.yaml');
@@ -76,7 +75,7 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
         if (hasLockFile && packageYmlInstalled.packages[e] && packageYmlInstalled.packages[e].version) {
           installed = packageYmlInstalled.packages[e].version;
         }
-        if (version.sdk) {
+        if (version !== null && version.sdk) {
           p.push(new Promise(resolve => {
             resolve(new Dependency(
               e,
@@ -84,7 +83,7 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
               TreeItemCollapsibleState.None,
               UpdateType.NoUpdate
             ));
-          }))
+          }));
           return;
         }
         p.push(rp(`https://pub.dartlang.org/api/packages/${e}`).then((json) => {
@@ -96,7 +95,7 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
             let cmd = {
               command: 'extension.openPackageOnPub',
               title: '',
-              arguments: [e]
+              arguments: [e, installed]
             };
             if (r.length === 0) {
               return new Dependency(
@@ -127,10 +126,6 @@ export class PubSpecProvider implements vscode.TreeDataProvider<Dependency> {
   private checkVersion(installedVersion:string , allowedVersion:string , versionToCheck:string): Boolean {
     return semver.satisfies(versionToCheck, allowedVersion) && semver.lt(installedVersion, versionToCheck);
   }
-
-  // private checkUpgradeVersion(installedVersion:string , allowedVersion:string , versionToCheck:string): Boolean {
-  //   return semver.lt(installedVersion, versionToCheck);
-  // }
 
   private getDepsInPackageVersions(moduleName: string):  Thenable<Dependency[]> {
     const module = moduleName.split(':').shift();

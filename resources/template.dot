@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <style>
+      ul {
+        padding-left: 0;
+        margin-left: 0;
+        list-style: none;
+      }
+      li {
+        padding-right: 1em;
+      }
+      .versions li {
+        padding: .25em;
+      }
+      .installed {
+        font-weight: bold;
+      }
+      svg {
+        border: 1px dotted black;
+        margin-bottom: 12px;
+        fill: white;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <h1>{{#has_update}}&#9888;{{/has_update}}{{^has_update}}&#10004;{{/has_update}} {{package.name}} {{installed}}</h1>
+    <ul style="padding-left: none; margin-left: 0;">
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}/versions/{{installed}}" target="_blank">Project on pub.dartlang.org</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="{{ package.latest.pubspec.homepage }}" target="_blank">Homepage</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}/versions/{{installed}}#-changelog-tab-" target="_blank">Changelog</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}/versions/{{installed}}#-example-tab-" target="_blank">Example</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}/versions/{{installed}}#-installing-tab-" target="_blank">Installing</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}/versions/{{installed}}#-versions-tab-" target="_blank">Versions</a>
+      </li>
+    </ul>
+    {{#has_update}}
+    <h1>{{package.name}} {{package.latest.pubspec.version}} (Latest)</h1>
+    <ul style="padding-left: none; margin-left: 0;">
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}" target="_blank">Project on pub.dartlang.org</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="{{ package.latest.pubspec.homepage }}" target="_blank">Homepage</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}#-changelog-tab-" target="_blank">Changelog</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}#-example-tab-" target="_blank">Example</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}#-installing-tab-" target="_blank">Installing</a>
+      </li>
+      <li style="display: inline-block">
+        <a href="https://pub.dartlang.org/packages/{{ package.name }}#-versions-tab-" target="_blank">Versions</a>
+      </li>
+    </ul>
+    {{/has_update}}
+    <p>{{ package.latest.pubspec.description}}</p>
+    <h3>Author</h3>
+    <p>{{package.latest.pubspec.author}}</p>
+    <h3>Dependencies</h3>
+    <ul>
+    {{#dependencies}}
+      <li>{{pkg}}{{#meta}}: {{meta}}{{/meta}}
+    {{/dependencies}}
+    {{^dependencies}}
+      <li>none</li>
+    {{/dependencies}}
+    </ul>
+    <h3>Versions</h3>
+    <ul class="versions">
+    {{#package.versions}}
+      {{#is_installed}}
+        <li class="installed">{{ version }}</li>
+      {{/is_installed}}
+      {{^is_installed}}
+        <li>{{ version }}</li>
+      {{/is_installed}}
+    {{/package.versions}}
+    </ul>
+
+  </body>
+<html>

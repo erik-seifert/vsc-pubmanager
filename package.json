@@ -2,7 +2,7 @@
     "name": "pubmanager",
     "displayName": "pubmanager",
     "description": "",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "repository": {
         "type": "git",
         "url": "https://github.com/b-connect/vsc-pubmanager"
@@ -16,8 +16,8 @@
         "Other"
     ],
     "keywords": [
-      "dart",
-      "pub"
+        "dart",
+        "pub"
     ],
     "activationEvents": [
         "onView:pubspecManager"
@@ -42,23 +42,31 @@
             ]
         },
         "menus": {
-          "view/title": [
-            {
-              "command": "pubmanager.refresh",
-              "when": "view == pubspecManager",
-              "group": "navigation"
-            }
-          ]
+            "view/title": [
+                {
+                    "command": "pubmanager.refresh",
+                    "when": "view == pubspecManager",
+                    "group": "navigation"
+                }
+            ]
         },
         "commands": [
-          {
-            "command": "pubmanager.refresh",
-            "title": "Refresh",
-            "icon": {
-              "light": "resources/light/refresh.svg",
-              "dark": "resources/dark/refresh.svg"
+            {
+                "command": "pubmanager.refresh",
+                "title": "Refresh",
+                "icon": {
+                    "light": "resources/light/refresh.svg",
+                    "dark": "resources/dark/refresh.svg"
+                }
+            },
+            {
+                "command": "pubmanager.show",
+                "title": "Show",
+                "icon": {
+                    "light": "resources/light/refresh.svg",
+                    "dark": "resources/dark/refresh.svg"
+                }
             }
-          }
         ]
     },
     "scripts": {
@@ -67,6 +75,7 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
+        "@types/dot": "^1.1.2",
         "@types/js-yaml": "^3.11.2",
         "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
@@ -79,7 +88,10 @@
         "vscode": "^1.1.6"
     },
     "dependencies": {
+        "@types/mustache": "^0.8.31",
+        "dot": "^1.1.2",
         "js-yaml": "^3.12.0",
+        "mustache": "^2.3.1",
         "request": "^2.87.0",
         "request-promise": "^4.2.2",
         "request-promise-native": "^1.0.5",
